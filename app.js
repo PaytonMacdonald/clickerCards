@@ -5,7 +5,7 @@ let cherryValue = 1;
 let money = 0;
 let cherryPickersSpeed = 1;
 let time = 5000;
-console.log(time);
+let marketPrice = 1;
 
 // LOGIC
 function getCherry() {
@@ -51,15 +51,6 @@ let autoCherry = setInterval(
         cherry += cherryPickers
         drawCherry()
     }, time)
-// let marketTimer = setInterval(
-//     function marketNum() {
-//         let marketRNG = Math.floor((Math.random() * 7) + 1);
-//         if (marketRNG > marketPrice) { highPriceDraw() }
-//         if (marketRNG < marketPrice) { lowPriceDraw() }
-//         if (marketRNG == marketPrice) { noChangeDraw() }
-//         marketPrice = marketRNG
-//         marketPriceDraw()
-//     }, 3000)
 
 // DRAWS
 function drawCherry() {
@@ -79,4 +70,27 @@ function drawCherryPickers() {
 }
 function drawCherryPickersSpeed() {
     document.getElementById('cherryPickersSpeed').innerText = cherryPickersSpeed
+}
+
+// MARKET
+let marketTimer = setInterval(
+    function marketNum() {
+        let marketRNG = Math.floor((Math.random() * 7) + 1);
+        if (marketRNG > marketPrice) { highPriceDraw() }
+        if (marketRNG < marketPrice) { lowPriceDraw() }
+        if (marketRNG == marketPrice) { noChangeDraw() }
+        marketPrice = marketRNG
+        marketPriceDraw()
+    }, 3000)
+function marketPriceDraw() {
+    document.getElementById('marketPrice').innerHTML = `<span>$${marketPrice}.00</span>`
+}
+function highPriceDraw() {
+    document.getElementById('marketPriceIcon').innerHTML = `<i class="bi bi-arrow-up-circle-fill text-success"></i>`
+}
+function lowPriceDraw() {
+    document.getElementById('marketPriceIcon').innerHTML = `<i class="bi bi-arrow-down-circle-fill text-danger"></i>`
+}
+function noChangeDraw() {
+    document.getElementById('marketPriceIcon').innerHTML = `<i class="bi bi-dash-circle-fill text-dark"></i>`
 }
